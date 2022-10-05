@@ -9,7 +9,8 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/worlds/', ['worlds/my_world.wbt']),
+        #('share/' + package_name + '/worlds/', ['worlds/my_world.wbt']),
+        ('share/' + package_name + '/worlds/', ['worlds/adeptNav2.wbt']),
         ('share/' + package_name + '/resource/', ['resource/my_robot.urdf']),
         ('share/' + package_name + '/launch/', ['launch/robot_launch.py']),
         ('share/' + package_name + '/config/', ['config/my_robot_lds_2d.lua', 'config/rviz_config.rviz']),
