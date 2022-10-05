@@ -45,10 +45,10 @@ def generate_launch_description():
         arguments=['joint_state_broadcaster'] + controller_manager_timeout,
     )
 
-    mappings = [('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel')]
+    #mappings = [('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel')]
 
-    # mappings = [('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel'),
-    #             ('/odom', '/odom0')]
+    mappings = [('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel'),
+                ('/odom', '/odom0')]
     if 'ROS_DISTRO' in os.environ and os.environ['ROS_DISTRO'] in ['humble', 'rolling']:
         mappings.append(('/diffdrive_controller/odom', '/odom'))
 
@@ -88,6 +88,27 @@ def generate_launch_description():
         output='screen',
         parameters=[robot_localization_file_path]
     )
+    cartographer_config_dir = os.path.join(package_dir, 'config')
+    configuration_basename = 'my_robot_lds_2d.lua'
+    resolution = '0.05'
+    publish_period_sec = '1.0'
+    rviz_config_file = os.path.join(package_dir, 'config', 'rviz_config.rviz')
+
+    cartographer_node = Node(
+            package='cartographer_ros',
+            executable='cartographer_node',
+            name='cartographer_node',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time}],
+            arguments=['-configuration_directory', cartographer_config_dir,
+                       '-configuration_basename', configuration_basename])
+    cartographer_occupency_grid_node = Node(
+            package='cartographer_ros',
+            executable='occupancy_grid_node',
+            name='occupancy_grid_node',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time}],
+            arguments=['-resolution', resolution, '-publish_period_sec', publish_period_sec])
     rviz_node = Node(
             package='rviz2',
             executable='rviz2',
@@ -129,7 +150,7 @@ def generate_launch_description():
                                 False, False, True],
             'debug': False,
         }],
-        #remappings=[('/odometry/filtered', '/odom')]
+        remappings=[('/odometry/filtered', '/odom')]
     )		
     odom_estimator = Node(
         package=package_name,
@@ -158,9 +179,11 @@ def generate_launch_description():
         footprint_publisher,
         #start_robot_localization_cmd,
         #odom_estimator,
-        #ekf_estimator,
+        ekf_estimator,
         rviz_node,
-        slam_toolbox,
+        #slam_toolbox,
+        cartographer_node,
+        cartographer_occupency_grid_node,
         joint_state_broadcaster_spawner,
         diffdrive_controller_spawner,
         launch.actions.RegisterEventHandler(
