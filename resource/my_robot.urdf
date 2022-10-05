@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<robot name="my_robot">
+    <webots>
+        <device reference="S300" type="Lidar">
+            <ros>
+                <enabled>true</enabled>
+                <updateRate>5</updateRate>
+                <topicName>/scan</topicName>
+                <alwaysOn>false</alwaysOn>
+                <frameName>S300</frameName>
+            </ros>
+        </device>
+
+        <plugin type="webots_ros2_driver::Ros2IMU">
+            <enabled>true</enabled>
+            <updateRate>20</updateRate>
+            <topicName>/imu</topicName>
+            <alwaysOn>false</alwaysOn>
+            <frameName>imu</frameName>
+            <inertialUnitName>imu</inertialUnitName>
+            <gyroName>gyro</gyroName>
+            <accelerometerName>acc</accelerometerName>
+        </plugin>
+
+        <plugin type="robot_simulation.my_robot_driver.MyRobotDriver" />
+
+    </webots>
+</robot>
