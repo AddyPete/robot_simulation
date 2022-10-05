@@ -12,7 +12,7 @@ setup(
         #('share/' + package_name + '/worlds/', ['worlds/my_world.wbt']),
         ('share/' + package_name + '/worlds/', ['worlds/adeptNav2.wbt']),
         #('share/' + package_name + '/resource/', ['resource/my_robot.urdf']),
-        data_files.append(('share/' + package_name + '/resource', ['resource/Pioneer_3-DX.urdf','resource/ros2control.yml']))
+        ('share/' + package_name + '/resource', ['resource/Pioneer_3-DX.urdf','resource/ros2control.yml']),
         ('share/' + package_name + '/launch/', ['launch/robot_launch.py']),
         ('share/' + package_name + '/config/', ['config/ekf.yaml','config/rviz_config.rviz','config/my_robot_lds_2d.lua', 'config/rviz_config.rviz']),
     ],
