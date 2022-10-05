@@ -13,7 +13,7 @@ package_name = 'robot_simulation'
 def generate_launch_description():
     package_dir = get_package_share_directory(package_name)
     robot_description = pathlib.Path(os.path.join(package_dir, 'resource', 'Pioneer_3-DX.urdf')).read_text()
-    s2_control_params = os.path.join(package_dir, 'resource', 'ros2control.yml')
+    ros2_control_params = os.path.join(package_dir, 'resource', 'ros2control.yml')
     robot_localization_file_path = pathlib.Path(os.path.join(package_dir, 'config', 'ekf.yaml'))
     rviz_config_file = os.path.join(package_dir, 'config', 'rviz_config.rviz')
     slam_toolbox_params = os.path.join(package_dir, 'config', 'slam_config.yaml')
