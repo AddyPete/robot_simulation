@@ -14,7 +14,7 @@ setup(
         #('share/' + package_name + '/resource/', ['resource/my_robot.urdf']),
         ('share/' + package_name + '/resource', ['resource/Pioneer_3-DX.urdf','resource/ros2control.yml']),
         ('share/' + package_name + '/launch/', ['launch/robot_launch.py']),
-        ('share/' + package_name + '/config/', ['config/rviz_config.rviz','config/my_robot_lds_2d.lua', 'config/rviz_config.rviz']),
+        ('share/' + package_name + '/config/', ['config/rviz_config.rviz','config/slam_config.yaml', 'config/rviz_config.rviz']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

@@ -46,6 +46,9 @@ def generate_launch_description():
     )
 
     mappings = [('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel')]
+
+    # mappings = [('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel'),
+    #             ('/odom', '/odom0')]
     if 'ROS_DISTRO' in os.environ and os.environ['ROS_DISTRO'] in ['humble', 'rolling']:
         mappings.append(('/diffdrive_controller/odom', '/odom'))
 
@@ -112,7 +115,7 @@ def generate_launch_description():
                             False, False, False],
             'imu0_queue_size': 40,
             #'odom0': '/odom0',
-            'odom0': '/odom',
+            'odom0': '/odom0',
             'odom0_config': [True, True, False,
                                 False, False, True,
                                 True, False, False,
@@ -145,7 +148,7 @@ def generate_launch_description():
         #condition=launch.conditions.IfCondition(use_slam)
         parameters=[
             {'use_sim_time': use_sim_time,
-                'params_file': slam_toolbox_params},
+            'params_file': slam_toolbox_params},
         ],
     )	
     return LaunchDescription([
@@ -155,7 +158,7 @@ def generate_launch_description():
         footprint_publisher,
         #start_robot_localization_cmd,
         #odom_estimator,
-        ekf_estimator,
+        #ekf_estimator,
         rviz_node,
         slam_toolbox,
         joint_state_broadcaster_spawner,

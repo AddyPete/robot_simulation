@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.0724622870280153 -0.9946709954801294 0.07334049160755654 4.7190922940245965
-  position -1.6093396912035374 -0.8705265220066358 12.03431529527603
+  orientation -0.07728746909515691 -0.9924055426592653 0.09569684435776524 4.916976699992333
+  position -15.139483041283963 5.563394504516506 35.835616832208444
 }
 RectangleArena {
   floorSize 100 100
@@ -13,60 +13,26 @@ RectangleArena {
   wallHeight 1
 }
 SolidBox {
-  translation 0 1.96 0.26
-  size 0.5 0.5 0.5
-}
-SolidBox {
-  translation 0 -3.08 0.26
-  name "box(1)"
-  size 0.5 0.5 0.5
-}
-SolidBox {
-  translation -1.45 -1.99 0.26
-  name "box(2)"
-  size 0.5 0.5 0.5
-}
-SolidBox {
-  translation -1.45 0.02 0.26
-  name "box(3)"
-  size 0.5 0.5 0.5
-}
-SolidBox {
-  translation 0.83 0 0.26
-  name "box(4)"
-  size 0.8 0.8 0.8
-}
-SolidBox {
-  translation 2.92 1.78 0.26
-  name "box(5)"
-  size 0.5 0.5 0.5
-}
-SolidBox {
-  translation 2.92 4.42 0.26
+  translation 0.51 2.14 0.49
   name "box(6)"
-  size 0.5 0.5 0.5
+  size 1 1 1
 }
 SolidBox {
-  translation -0.73 4.42 0.26
-  name "box(7)"
-  size 0.5 0.5 0.5
+  translation -5.63 6.26 0.49
+  name "box(2)"
+  size 1 1 1
 }
 SolidBox {
-  translation 1.43 6.2 0.26
-  name "box(8)"
-  size 0.5 0.5 0.5
-}
-SolidBox {
-  translation 1.98 -2.14 0.26
-  name "box(9)"
-  size 0.5 0.5 0.5
+  translation -10.76 10.21 0.49
+  name "box(1)"
+  size 1 1 1
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 Robot {
-  translation 0 0 0.0975
+  translation 0 -2.18 0.0975
   rotation 0 1 0 0
   children [
     Gyro {
@@ -1880,4 +1846,25 @@ Robot {
     ]
   }
   controller "<extern>"
+}
+Wall {
+  translation 2.85 4.33 0
+  size 0.3 17 3.1
+}
+Wall {
+  translation -13.83 4.33 0
+  name "wall(3)"
+  size 0.3 17 3.1
+}
+Wall {
+  translation -5.47 -4.29 0
+  rotation 0 0 1 -1.5707953071795862
+  name "wall(1)"
+  size 0.3 17 3.1
+}
+Wall {
+  translation -5.47 12.98 0
+  rotation 0 0 1 -1.5707953071795862
+  name "wall(2)"
+  size 0.3 17 3.1
 }
