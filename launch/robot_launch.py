@@ -2,9 +2,11 @@ import os
 import pathlib
 from pickle import TRUE
 import launch
-from launch_ros.actions import Node
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
+from launch_ros.actions import Node
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
+from ament_index_python.packages import get_package_share_directory
 from webots_ros2_driver.webots_launcher import WebotsLauncher
 
 
@@ -14,11 +16,13 @@ def generate_launch_description():
     package_dir = get_package_share_directory(package_name)
     robot_description = pathlib.Path(os.path.join(package_dir, 'resource', 'Pioneer_3-DX.urdf')).read_text()
     ros2_control_params = os.path.join(package_dir, 'resource', 'ros2control.yml')
+    # slam_params_file = os.path.join(package_dir, 'config', 'slam_config.yml')
     robot_localization_file_path = pathlib.Path(os.path.join(package_dir, 'config', 'ekf.yaml'))
     rviz_config_file = os.path.join(package_dir, 'config', 'rviz_config.rviz')
     slam_toolbox_params = os.path.join(package_dir, 'config', 'slam_config.yaml')
 	# remappings=[('odometry/filtered','odom')]
     use_sim_time = True
+    slam_params_file = LaunchConfiguration('slam_params_file')
 
     webots = WebotsLauncher(
         world=os.path.join(package_dir, 'worlds', 'adeptNav2.wbt')
@@ -160,6 +164,12 @@ def generate_launch_description():
             'use_sim_time': use_sim_time,
         }],
     )	
+
+    declare_slam_params_file_cmd = DeclareLaunchArgument(
+        'slam_params_file',
+        default_value=os.path.join(get_package_share_directory("robot_simulation"),'config','slam_config.yaml'),
+        description="Slam Toolbox Params")
+
     slam_toolbox = Node(
         #parameters=[{'use_sim_time': use_sim_time}],
         package='slam_toolbox',
@@ -168,10 +178,12 @@ def generate_launch_description():
         output='screen',
         #condition=launch.conditions.IfCondition(use_slam)
         parameters=[
-            {'use_sim_time': use_sim_time,
-            'params_file': slam_toolbox_params},
+            slam_params_file,
+            {'use_sim_time': use_sim_time}
+            
         ],
     )	
+    print(slam_toolbox_params)
     return LaunchDescription([
         webots,
         adeptnav2,
@@ -181,9 +193,11 @@ def generate_launch_description():
         #odom_estimator,
         ekf_estimator,
         rviz_node,
-        #slam_toolbox,
-        cartographer_node,
-        cartographer_occupency_grid_node,
+        declare_slam_params_file_cmd,
+        slam_toolbox,
+        #declare_slam_params_file_cmd,
+        #cartographer_node,
+        #cartographer_occupency_grid_node,
         joint_state_broadcaster_spawner,
         diffdrive_controller_spawner,
         launch.actions.RegisterEventHandler(
