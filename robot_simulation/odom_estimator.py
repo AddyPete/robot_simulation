@@ -8,7 +8,7 @@ from nav_msgs.msg import Odometry
 from sensor_msgs.msg import JointState
 from sensor_msgs.msg import CameraInfo
 from tf2_ros import TransformBroadcaster, TransformStamped, StaticTransformBroadcaster
-import tf_transformations
+from tf_transformations import euler_from_quaternion
 
 ODOM_FRAME_NAME = 'odom'
 BASE_LINK_FRAME_NAME = 'base_link'

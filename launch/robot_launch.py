@@ -49,10 +49,10 @@ def generate_launch_description():
         arguments=['joint_state_broadcaster'] + controller_manager_timeout,
     )
 
-    #mappings = [('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel')]
+    mappings = [('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel')]
 
-    mappings = [('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel'),
-                ('/odom', '/odom0')]
+    # mappings = [('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel'),
+    #             ('/odom', '/odom0')]
     if 'ROS_DISTRO' in os.environ and os.environ['ROS_DISTRO'] in ['humble', 'rolling']:
         mappings.append(('/diffdrive_controller/odom', '/odom'))
 
@@ -183,7 +183,7 @@ def generate_launch_description():
             
         ],
     )	
-    print(slam_toolbox_params)
+    #print(slam_toolbox_params)
     return LaunchDescription([
         webots,
         adeptnav2,
@@ -191,15 +191,24 @@ def generate_launch_description():
         footprint_publisher,
         #start_robot_localization_cmd,
         #odom_estimator,
-        ekf_estimator,
+        #ekf_estimator,
         rviz_node,
+
+        #######SLAMTOOLBOX############
         declare_slam_params_file_cmd,
         slam_toolbox,
-        #declare_slam_params_file_cmd,
-        #cartographer_node,
-        #cartographer_occupency_grid_node,
+        #############################
+
+        #CARTO#######################
+        # cartographer_node,
+        # cartographer_occupency_grid_node,
+        #########################
+
+
+        #########controller_manager
         joint_state_broadcaster_spawner,
         diffdrive_controller_spawner,
+        ###############
         launch.actions.RegisterEventHandler(
             event_handler=launch.event_handlers.OnProcessExit(
                 target_action=webots,

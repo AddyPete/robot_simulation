@@ -1,0 +1,12 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/addywfh/ros2_ws/install/my_package/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages",
+        "/usr/local/webots/lib/controller/python38"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/addywfh/ros2_ws/install/my_package/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages",
+        "/usr/local/webots/lib/controller/python38"
+    ]
+}

@@ -14,22 +14,22 @@ class MyRobotDriver:
         def init(self, webots_node, properties):
             self.__robot = webots_node.robot
             
-            self.__front_left_motor = self.__robot.getDevice('front left wheel')
-            self.__back_left_motor = self.__robot.getDevice('back left wheel')
-            self.__front_right_motor = self.__robot.getDevice('front right wheel')
-            self.__back_right_motor = self.__robot.getDevice('back right wheel')
+            self.__front_left_motor = self.__robot.getDevice('left wheel')
+            #self.__back_left_motor = self.__robot.getDevice('back left wheel')
+            self.__front_right_motor = self.__robot.getDevice('right wheel')
+            #self.__back_right_motor = self.__robot.getDevice('back right wheel')
 
             self.__front_left_motor.setPosition(float('inf'))
             self.__front_left_motor.setVelocity(0)
 
-            self.__back_left_motor.setPosition(float('inf'))
-            self.__back_left_motor.setVelocity(0)
+            #self.__back_left_motor.setPosition(float('inf'))
+            #self.__back_left_motor.setVelocity(0)
 
             self.__front_right_motor.setPosition(float('inf'))
             self.__front_right_motor.setVelocity(0)
 
-            self.__back_right_motor.setPosition(float('inf'))
-            self.__back_right_motor.setVelocity(0)
+            #self.__back_right_motor.setPosition(float('inf'))
+            #self.__back_right_motor.setVelocity(0)
 
             self.__target_twist = Twist()
             
@@ -52,6 +52,6 @@ class MyRobotDriver:
             command_motor_right = min(command_motor_right, MAX_VELOCITY)
 
             self.__front_left_motor.setVelocity(command_motor_left)
-            self.__back_left_motor.setVelocity(command_motor_left)
+            #self.__back_left_motor.setVelocity(command_motor_left)
             self.__front_right_motor.setVelocity(command_motor_right)
-            self.__back_right_motor.setVelocity(command_motor_right)
+            #self.__back_right_motor.setVelocity(command_motor_right)
